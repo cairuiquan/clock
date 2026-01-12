@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>高精度推流测速时钟</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #00ff00; /* 高亮绿，相机捕捉最清晰 */
+            font-family: 'Monaco', 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        #clock {
+            font-size: 12vw; /* 随窗口大小自动缩放 */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="clock">00:00:00.000</div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            const ms = String(now.getMilliseconds()).padStart(3, '0');
+            
+            document.getElementById('clock').textContent = `${h}:${m}:${s}.${ms}`;
+            // 使用 requestAnimationFrame 实现 60fps 满帧刷新，比 setTimeout 更准
+            requestAnimationFrame(updateClock);
+        }
+        updateClock();
+    </script>
+</body>
+</html>
